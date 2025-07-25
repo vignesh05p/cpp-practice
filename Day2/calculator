@@ -1,0 +1,66 @@
+//calculator  using switch
+
+#include<iostream>
+#include<cmath>
+
+int main(){
+    
+    double a;
+    double b;
+    char c;
+    double sum;
+    
+    std::cout << "enter the a " << std::endl;
+    std::cin >>a ;
+    std::cout << "enter the b" << std::endl;
+    std::cin >>b ;
+    
+    
+    std::cout<<"enter  the operation(+,-,*,/.)";
+    std::cin>> c;
+    
+    
+    switch(c){
+        case '+':
+            sum=a+b;
+            break;
+            
+        case '-':
+            sum=a-b;
+            break;
+            
+        case '*':
+            sum=a*b;
+            break;
+            
+        case '/':
+        
+            if(b==0){
+                std::cout<<"cannot be devide";
+            }
+                
+            else{
+                sum=a/b;
+            
+            }
+            break;
+            
+        default:
+            std::cout<<"enter a valied operator";
+            break;
+        
+        
+        
+    }
+    
+    
+    
+    std::cout << "solution:"<<a<<c<<b<<"="<<sum;
+   
+    
+    
+    
+    
+    
+    return 0;
+}
