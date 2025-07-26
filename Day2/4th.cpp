@@ -7,9 +7,7 @@ int main() {
     double temp;
     char unit;
 
-    cout << "************************************" << endl;
-    cout << "******** Temperature Converter ******" << endl;
-
+   
     cout << "Enter unit (C for Celsius / F for Fahrenheit): ";
     cin >> unit;
 
