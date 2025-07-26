@@ -1,45 +1,31 @@
-// // gven:
-// // An array nums[] of size n and an integer k.
-
-// // Task:
-// // Find the maximum element in every sliding window of size k.
-// Constraints:
-// 1 <= nums.length <= 10^5
-
-// -10^4 <= nums[i] <= 10^4
-
-// 1 <= k <= nums.length
-
-// Must run in O(n) time
-
 #include <iostream>
 #include <vector>
 #include <deque>
 
 using namespace std;
 
-vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-    deque<int> dq; // Will store indices of useful elements
+// Optimized O(n) function to find max in each sliding window of size k
+vector<int> maxSlidingWindow(const vector<int>& nums, int k) {
+    int n = nums.size();
+    if (n == 0 || k == 0) return {};
+
+    deque<int> dq;  // Stores indices of elements in decreasing order
     vector<int> result;
 
-    for (int i = 0; i < nums.size(); ++i) {
-        // 1. Remove indices that are out of this window
-        if (!dq.empty() && dq.front() <= i - k) {
+    for (int i = 0; i < n; ++i) {
+        // Remove indices that are out of the current window
+        while (!dq.empty() && dq.front() <= i - k)
             dq.pop_front();
-        }
 
-        // 2. Remove elements smaller than current element from the back
-        while (!dq.empty() && nums[dq.back()] < nums[i]) {
+        // Remove indices whose values are less than nums[i]
+        while (!dq.empty() && nums[dq.back()] < nums[i])
             dq.pop_back();
-        }
 
-        // 3. Add current element's index
-        dq.push_back(i);
+        dq.push_back(i);  // Add current index
 
-        // 4. If window is at least k elements, add max to result
-        if (i >= k - 1) {
+        // Append the max value to result once the first window is completed
+        if (i >= k - 1)
             result.push_back(nums[dq.front()]);
-        }
     }
 
     return result;
@@ -51,9 +37,9 @@ int main() {
 
     vector<int> res = maxSlidingWindow(nums, k);
 
-    cout << "Sliding window maximums are: ";
-    for (int val : res) {
-        cout << val << " ";
+    cout << "Sliding window maximums: ";
+    for (int maxVal : res) {
+        cout << maxVal << " ";
     }
     cout << endl;
 
